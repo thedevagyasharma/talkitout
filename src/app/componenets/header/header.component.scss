@@ -1,0 +1,76 @@
+@import url(../../../styles.scss);
+
+.header{
+    height: 100px;
+    background-color: #F7F7FC;
+    padding: 0px 22px 0px 22px;
+    
+
+    .btn-join{
+        height: 52px;
+        padding: 11px 22px 14px 22px;
+        border: 0px;
+        border-radius: 12px;
+        background-color: #610BEF;
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+        transition: 0.1s ease-out;
+        letter-spacing: 0.75px;
+
+        &:hover{
+          background-color: #4700ab;
+          transition: background-color 0.1s ease-out;
+        }
+    }
+
+    .btn-signup{
+        height: 52px!important;
+        padding: 11px 22px 14px 22px;
+        border: 2px solid #610BEF;
+        border-radius: 12px;
+        color: #610BEF;
+        font-weight: 600;
+        font-size: 18px;
+        align-self: center;
+        align-content: center;
+        letter-spacing: 0.75px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.1s ease-out;
+
+        &:hover{
+          color:white;
+          background-color: #610BEF;
+          transition: all 0.1s ease-out;
+        }
+    }
+    nav{
+      ul{
+        li{
+          height: 60px;
+          width: 120px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          a{
+            text-decoration: none;
+            border-bottom: 0px solid transparent;
+            font-weight: 600;
+            font-size: 18px;
+            color: #610BEF;
+            letter-spacing: 0.75px;
+            transition: 0.1s ease-out;
+
+            &:hover{
+              border-bottom: 4px solid #610BEF;
+              transition: border-bottom 0.1s ease-out;
+            }
+          }
+         
+        }
+      }
+    }
+
+}

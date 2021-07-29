@@ -1,1 +1,31 @@
-<p>register works!</p>
+<div class="container">
+    <div class="row d-flex m-auto justify-content-center">
+        <div class="col-6 formbox">
+            <h2>Welcome to Talkitout!</h2>
+            <h3>Register Now</h3>
+            <form #regForm = "ngForm" (ngSubmit)="onSubmit(regForm)">
+                <div class="field form-floating">
+                    <input type="text" class="form-control" id="floatingname" requried name="name" [ngModel]="user.name" placeholder="Name">
+                    <label for="floatingname" class="label">Name</label>
+                </div>
+                <div class="field form-floating">
+                    <input type="email" class="form-control" requried name="email" [ngModel]="user.email" placeholder="Email">
+                    <label for="" class="label">Email</label>
+                </div>
+                <div class="field form-floating">
+                    <input type="password" class="form-control" requried name="password" [ngModel]="user.password" placeholder="Password">
+                    <label for="" class="label">Password</label>
+                </div>
+                <div class="field form-floating">
+                    <input type="password" class="form-control" requried name="cnfpassword" [ngModel]="cnfpassword" placeholder="Confirm Password">
+                    <label for="" class="label">Confirm Password</label>
+                </div>
+                <div class="">
+                    <div class="control"><button class="button" type="submit">Save</button></div>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    
+</div>
