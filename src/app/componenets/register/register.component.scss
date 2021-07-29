@@ -1,7 +1,10 @@
 .formbox{
     padding-top: 55px;
-    margin-top: 140px;
+    padding-bottom: 50px;
+    margin-top: 80px;
     background-color: #f7f7fc;
+    justify-content: center;
+    text-align: center;
     
     h2, h3{
         font-weight: bold;
@@ -24,7 +27,20 @@
             width: 100%;
             border: none;
             background-color: #EFF0F6;
-        }
+        }   
+    }
+    .btn-register{
+        margin-top: 45px;
+        align-self: center;
+        width: 185px;
+        height: 72px;
+        background-color: #610BEF;
+        border-radius: 48px;
+        border: none;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.75px;
 
     }
 }
