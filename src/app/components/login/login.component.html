@@ -2,23 +2,22 @@
     <div class="row d-flex m-auto justify-content-center">
         <div class="col-5 formbox">
             <h2>Welcome to Talkitout!</h2>
-            <h3>Register Now</h3>
-            <form #regForm = "ngForm" (ngSubmit)="onSubmit(regForm)">
-                <div class="field form-floating">
-                    <input type="text" class="form-control" id="floatingname" requried name="name" [ngModel]="user.name" placeholder="Name">
-                    <label for="floatingname" class="label">Name</label>
-                </div>
-                <div class="field form-floating">
-                    <input type="email" class="form-control" requried name="email" [ngModel]="user.email" placeholder="Email">
+            <h3>Login</h3>
+
+            <div>
+                <div class="errors" *ngIf="this.response == 'incorrectPassword'">Password incorrect.</div>
+                <div class="errors" *ngIf="this.response == 'notExists'">User does not exist. Please create an account first.</div>
+                
+            </div>
+            
+            <form [formGroup]="logForm" (ngSubmit)="onSubmit()">
+                <div class="field form-floating" [class.invalid]="logForm.get('email')?.invalid && (!logForm.get('email')?.pristine || logForm.get('email')?.dirty)">
+                    <input type="email" class="form-control" formControlName="email" placeholder="Email" required>
                     <label for="" class="label">Email</label>
                 </div>
-                <div class="field form-floating">
-                    <input type="password" class="form-control" requried name="password" [ngModel]="user.password" placeholder="Password">
+                <div class="field form-floating" [class.invalid]="">
+                    <input type="password" class="form-control" formControlName="password" placeholder="Password" pattern='^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$' required>
                     <label for="" class="label">Password</label>
-                </div>
-                <div class="field form-floating">
-                    <input type="password" class="form-control" requried name="cnfpassword" [ngModel]="cnfpassword" placeholder="Confirm Password">
-                    <label for="" class="label">Confirm Password</label>
                 </div>
                 <button class="btn-register" type="submit">
                     <div>
@@ -26,7 +25,7 @@
                             <path d="M16.9506 16.3802C15.3783 15.5669 12.7849 14.5 10 14.5C7.21513 14.5 4.62175 15.5669 3.04942 16.3802C2.03431 16.9052 1.42295 17.9351 1.2883 19.07L1 21.5H19L18.7117 19.07C18.577 17.9351 17.9657 16.9052 16.9506 16.3802Z" stroke="#FCFCFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M10 10C12.4853 10 14.5 7.98528 14.5 5.5C14.5 3.01472 12.4853 1 10 1C7.51472 1 5.5 3.01472 5.5 5.5C5.5 7.98528 7.51472 10 10 10Z" stroke="#FCFCFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Register
+                        Login
                     </div>
                 </button>
             </form>

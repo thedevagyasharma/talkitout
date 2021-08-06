@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row d-flex m-auto justify-content-center">
+        <div class="col-5 formbox">
+            <h2>Welcome to Talkitout!</h2>
+            <h3>Register Now</h3>
+            <div>
+                <div class="errors" *ngIf="regForm.get('password')?.hasError('pattern') && (regForm.get('password')?.touched || regForm.get('password')?.dirty)">Password must contain at least 8 characters. 1 UPPERCASE letter, 1 lowercase letter and 1 special symbol (!@#$%^&*)</div>
+                <div class="errors" *ngIf="regForm.hasError('userExist')">User already exists. Try another email.</div>
+                <div class="errors" *ngIf="regForm.hasError('noMatch') && (regForm.get('cnfpass')?.touched || regForm.get('cnfpass')?.dirty)">Password does not match.</div>
+                
+            </div>
+            
+            <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
+                <div class="field form-floating">
+                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" required>
+                    <label for="floatingname" class="label">Name</label>
+                </div>
+                <div class="field form-floating" [class.invalid]="(regForm.hasError('userExist') || regForm.get('email')?.hasError('email')) && (regForm.get('email')?.touched || regForm.get('email')?.dirty)">
+                    <input type="email" class="form-control" name="email" id="email" formControlName="email" placeholder="Email" required>
+                    <label for="email" class="label">Email</label>
+                </div>
+                <div class="field form-floating" [class.invalid]="regForm.get('password')?.hasError('pattern') && (regForm.get('password')?.touched || regForm.get('password')?.dirty)" [class.success]="regForm.get('password')?.valid && (regForm.get('password')?.touched || regForm.get('password')?.dirty)">
+                    <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password" pattern='' required>
+                    <label for="password" class="label">Password</label>
+                </div>
+                <div class="field form-floating" [class.invalid]="(regForm.hasError('noMatch')) && (regForm.get('cnfpass')?.touched || regForm.get('cnfpass')?.dirty)" [class.success]="(regForm.get('cnfpass')?.value != '')&&(regForm.get('password')?.value == regForm.get('cnfpass')?.value) && (regForm.get('cnfpass')?.touched || regForm.get('cnfpass')?.dirty)">
+                    <input type="password" class="form-control" id="cnfpass" formControlName="cnfpass" placeholder="Confirm Password" required>
+                    <label for="cnfpass" class="label">Confirm Password</label>
+                </div>
+                <button class="btn-register" type="submit" [disabled]="regForm.invalid">
+                    <div>
+                        <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.9506 16.3802C15.3783 15.5669 12.7849 14.5 10 14.5C7.21513 14.5 4.62175 15.5669 3.04942 16.3802C2.03431 16.9052 1.42295 17.9351 1.2883 19.07L1 21.5H19L18.7117 19.07C18.577 17.9351 17.9657 16.9052 16.9506 16.3802Z" stroke="#FCFCFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 10C12.4853 10 14.5 7.98528 14.5 5.5C14.5 3.01472 12.4853 1 10 1C7.51472 1 5.5 3.01472 5.5 5.5C5.5 7.98528 7.51472 10 10 10Z" stroke="#FCFCFC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Register
+                    </div>
+                </button>
+            </form>
+        </div>
+        
+    </div>
+    
+</div>
