@@ -10,7 +10,7 @@
                 
             </div>
             
-            <form [formGroup]="logForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="logForm" (ngSubmit)="onSubmit()" style="margin-bottom:30px">
                 <div class="field form-floating" [class.invalid]="logForm.get('email')?.invalid && (!logForm.get('email')?.pristine || logForm.get('email')?.dirty)">
                     <input type="email" class="form-control" formControlName="email" placeholder="Email" required>
                     <label for="" class="label">Email</label>
@@ -29,8 +29,14 @@
                     </div>
                 </button>
             </form>
+            <div>
+               <p>Forgot Password? <a href="/reset">Click here to reset</a></p>
+            </div>
         </div>
         
     </div>
     
 </div>
+
+<script type="text/javascript" src="${zoomJSLib}${zoomJSAVLib}/av/../{avMediaVersion}_webim.min.js"></script>
+<script type="text/javascript" src="${zoomJSLib}${zoomJSAVLib}/av/{avMediaVersion}_js_media.min.js"></script>

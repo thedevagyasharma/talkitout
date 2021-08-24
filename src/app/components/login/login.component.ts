@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { PasswordService } from 'src/app/services/password.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

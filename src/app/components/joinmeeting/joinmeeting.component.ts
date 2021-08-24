@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ZoomMtg } from '@zoomus/websdk';
 import { CookieService } from 'ngx-cookie-service';
-import { DOCUMENT } from '@angular/common';
+
+import { ZoomMtg } from '@zoomus/websdk';
 
 ZoomMtg.preLoadWasm();
-//ZoomMtg.prepareWebSDK();
+ZoomMtg.prepareWebSDK();
 ZoomMtg.i18n.load('en-US');
 ZoomMtg.i18n.reload('en-US');
 
@@ -23,48 +23,52 @@ export class JoinmeetingComponent implements OnInit {
     meetingPassword: ['']
   })
 
-
-
   signatureEndpoint = 'http://localhost:4000'
   apiKey = 'SPv_tb4OREegdpGaclN7IQ'
-  meetingNumber = this.joinform.get('meetingNumber')?.value;
-  role = 0
-  leaveUrl = 'http://localhost:4200'
+  meetingNumber = ''
+  role = 0  
+  leaveUrl = 'http://localhost:4200/joinmeeting'
   userName = this.cookieService.get('Username');
   userEmail = ''
-  passWord = 'TFgzSk16bmR2NW05SEtUblQ1RU8xdz09'
+  passWord = ''
   registrantToken = '';
-  display = false;
   
-  constructor(private fb: FormBuilder, private cookieService: CookieService, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private cookieService: CookieService, private http: HttpClient) {   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     
   }
 
   onSubmit(){
+    this.meetingNumber = this.joinform.get('meetingNumber')?.value;
+    this.passWord = this.joinform.get('meetingPassword')?.value;
     this.getSignature();
   }
 
   getSignature(){
     this.http.post(this.signatureEndpoint, {
-      'meetingNumber': this.meetingNumber,
-      'role': this.role
+      meetingNumber: this.meetingNumber,
+      role: this.role
     }).subscribe((data:any) => {
       if(data.signature){
+        //console.log("call",data)
         this.startMeeting(data.signature)
       } else {
-        console.log(data)
+        console.log("error",data)
       }
     })
   }
 
   startMeeting(signature: string){
-    this.display = true;
+    const tag = document.querySelector("#zmmtg-root")
+    if(tag){
+      tag.setAttribute("style","display:block!important") 
+    }
+    
     ZoomMtg.init({
       leaveUrl: this.leaveUrl,
       success: (success:any) => {
-        console.log(success);
+        console.log(success)
         ZoomMtg.join({
           signature: signature,
           meetingNumber: this.meetingNumber,
@@ -73,13 +77,17 @@ export class JoinmeetingComponent implements OnInit {
           userEmail: this.userEmail,
           passWord: this.passWord,
           tk: this.registrantToken,
-          success: (success: any) => {
+          success: (success:any) => {
             console.log(success)
           },
-          error: (error: any) => {
+          error: (error:any) => {
             console.log(error)
           }
         })
+
+      },
+      error: (error:any) => {
+        console.log(error)
       }
     })
   }

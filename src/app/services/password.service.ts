@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Md5} from 'ts-md5/dist/md5';
+import { User } from '../shared/user.model';
 
 
 @Injectable({

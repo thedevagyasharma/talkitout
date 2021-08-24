@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 export class StartmeetingComponent implements OnInit {
 
   constructor() { }
+  camOn = false;
 
   ngOnInit(): void {
   }
-
+  // VideoElement = new HTMLVideoElement();
+  // vidbox : Element = document.getElementsByClassName("video-preview")[0];
+  // this.vidbox = this.vidbox.append(this.VideoElement);
 }

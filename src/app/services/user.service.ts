@@ -64,4 +64,9 @@ export class UserService {
     console.log("loggingout")
     this.cookieService.deleteAll();
   }
+
+  resetPass(user: User): Observable<User>{
+    user.password = this.passService.hashPass(user.password);
+    return this.http.put<User>(this.url+"/"+user.id, user, httpOptions);
+  }
 }

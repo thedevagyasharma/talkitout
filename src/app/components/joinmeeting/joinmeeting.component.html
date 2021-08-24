@@ -1,6 +1,5 @@
-<div id="zmmtg-root">
-    
-</div>
+
+<!-- <div id="zmmtg-root"></div> -->
 <div class="container">
     <div class="row d-flex m-auto justify-content-center">
         <div class="col-5 formbox">
@@ -12,14 +11,14 @@
             </div> -->
             <form [formGroup]="joinform" style="margin-top: 20px;" (ngSubmit)="onSubmit()">
                 <div class="field form-floating" [class.invalid]="">
-                    <input type="text" class="form-control" formControlName="meetingNumber" placeholder="Meeting ID" required>
+                    <input type="   " class="form-control" formControlName="meetingNumber" placeholder="Meeting ID" required>
                     <label for="" class="label">Meeting ID</label>
                 </div>
                 <div class="field form-floating" [class.invalid]="">
                     <input type="password" class="form-control" formControlName="meetingPassword" placeholder="Meeting Password" required>
                     <label for="" class="label">Meeting Password</label>
                 </div>
-                <div class="participant-name">Joining as <h4>{{ userName }}</h4></div>
+                <div class="participant-name" style="margin-top: 40px;">Joining as <h4>{{ userName }}</h4></div>
                 <button class="btn-register" type="submit">Join Meeting</button>
             </form>
             
