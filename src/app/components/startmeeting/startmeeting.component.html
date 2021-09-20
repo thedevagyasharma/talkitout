@@ -1,17 +1,48 @@
+<meta http-equiv="origin-trial" 
+        content="ApbyCprSSGVaT3D3B6PtIv+n/9OBJNNvn90FOjL7bJcSHnPiF3EWtIu0cucMH4cSEaJfG+5/wMev1YBGHQNkHw0AAABLeyJvcmlnaW4iOiJodHRwczovLzAuMC4wLjA6MzAwMCIsImZlYXR1cmUiOiJXZWJDb2RlY3MiLCJleHBpcnkiOjE2MjYyMjA3OTl9"
+    >
+<link rel="preload" href="../../../assets/images/mic-on.svg" as="image" type="image/svg+xml">
+<link rel="preload" href="../../../assets/images/mic-off.svg" as="image" type="image/svg+xml">
+
+
 <div class="container">
     <div class="row d-flex m-auto justify-content-center">
-        <div class="col-5 formbox">
-            <h2>Start a New Meeting</h2>
-            <div class="video-preview">
-                <video src="" id="vid-prev"></video>
+        
+        <div class="col-5 formbox" >
+            <h2 *ngIf="hasRoute('/newmeeting')">Start New Meeting</h2>
+            <h2 *ngIf="hasRoute('/joinmeeting')">Join Meeting</h2>
+            <div class="video-preview" style="transform: rotateY(180deg);">
+                <video id="vid-prev" width=320></video>
             </div>
-            <div class="participant-name">Joining as <h4>John Doe</h4></div>
+            <div class="audio-preview d-flex">
+                <div class="audio-bar active"  *ngFor="let i of Arr(this.prevMicFBStyle)"></div>
+                <div class="audio-bar" *ngFor="let i of Arr(6-this.prevMicFBStyle)"></div>
+            </div>
+            <div class="participant-name">Joining as <h4>{{ userName }}</h4></div>
             <div class="media-control">
-                <button class="btn-media">Camera On</button>
-                <button class="btn-media">Microphone On</button>
+                <button class="btn-media cam" [class.on]="this.iscamon" id="btn-cam-prev" (click)="testCamera()"></button>
+                <button class="btn-media mic" [class.on]="!this.isMuted" id="btn-mic-prev" (click)="testMic()"></button>
             </div>
-            <button class="btn-register">Start New Meeting</button>
+            <div class="spinner" id="spinner">
+                <sa-spinner-dotted [enabled]="this.spinner" color="#610BEF"></sa-spinner-dotted>
+            </div>
+            <form style="margin-top: 20px;" [formGroup]="newMeetingForm" [class.d-none]=this.spinner>
+                <div class="field form-floating" [class.invalid]="">
+                    <input type="" class="form-control" formControlName="topic" placeholder="Set Meeting Topic" required>
+                    <label for="" class="label" *ngIf="hasRoute('/newmeeting')">Set Meeting Topic</label>
+                    <label for="" class="label" *ngIf="hasRoute('/joinmeeting')">Meeting Topic</label>
+                </div>
+                <div class="field form-floating" [class.invalid]="">
+                    <input type="" class="form-control" formControlName="password" placeholder="Set Meeting Password" required>
+                    <label for="" class="label" *ngIf="hasRoute('/newmeeting')">Set Meeting Password</label>
+                    <label for="" class="label" *ngIf="hasRoute('/joinmeeting')">Meeting Password</label>
+                </div>
+                <button class="btn-register" *ngIf="hasRoute('/newmeeting')" (click)="createNewMeeting()">Start New Meeting</button>
+                <button class="btn-register" *ngIf="hasRoute('/joinmeeting')" >Join Meeting</button> 
+                <!-- (click)="joinMeeting()" -->
+            </form>
+            
         </div>
     </div>
-
 </div>
+

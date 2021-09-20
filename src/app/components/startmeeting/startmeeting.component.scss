@@ -24,34 +24,92 @@
     }
 
     .media-control{
-        margin-top: 25px;
+        margin: 12px 0;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
+    }
+
+    .field{
+        width: 325px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        height: 64px;
+        align-self: center;
+        border-radius: 16px;  
+          
+        &.invalid{
+            color: #9E0038;
+            input{
+                background-color: #ffecfc;
+                border: 2px solid #ca024f;
+            }
+        }
+        &.success{
+            color: #00966D;
+            input{
+                background-color: #EAF9DE ;
+                border:2px solid #008A00;
+            }
+        }
+
+        input{
+            height: 100%;
+            width: 100%;
+            border: none;
+            border-radius: 16px;
+            background-color: #EFF0F6;
+            // &.invalid{
+            //     background-color: #ffecfc;
+            //     border: 2px solid #ca024f;
+            // }
+        }   
     }
 
     .btn-media{
-        height: 52px;
+        height: 64px;
+        width: 64px;
         border: 0px;
         border-radius: 32px;
-        background-color: #EF0B42;
-        font-size: 16px;
-        font-weight: 600;
-        color: white;
-        letter-spacing: 0.75px;
-        padding: 0px 20px;
+        padding: 0px 10px;
+        background-position: center;
+        background-repeat: no-repeat;
+        border: 2px solid #EF0B42;
+        background-color: #FFF;
+        color: #EF0B42;
+
+        &.on{
+            border: 0px;
+            background-color: #EF0B42;
+            color: white;
+        }
+
+        &.mic{
+            background-image: url('../../../assets/images/mic-off.svg');
+            &.on{
+                background-image: url('../../../assets/images/mic-on.svg');
+            }
+        }
+        &.cam{
+            background-image: url('../../../assets/images/camera-off.svg');
+            &.on{
+                background-image: url('../../../assets/images/camera-on.svg');
+            }
+        }
     }
    
 
     .video-preview{
-        height: 240px;
+        height: 180px;
         width: 320px;
-        background-color: #c4c4c4;
+        background-color: black;
         margin: auto;
         margin-top: 50px;
+        margin-bottom: 10px;
     }
 
     .btn-register{
-        margin-top: 45px;
+        margin-top: 20px;
         align-self: center;
         padding: 0px 25px;
         height: 72px;
@@ -66,4 +124,25 @@
             background-color: #ac81f3;
         }
     }
+
+    .audio-preview{
+        justify-content: start;
+        margin: 0 auto;
+        width: 320px;
+        .audio-bar{
+            width: 52px;
+            height: 10px;
+            margin: 1px;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            &.active{
+                background-color: #008A00;
+            }
+            
+        }
+    }
+}
+
+.spinner{
+    padding: 30px 0 0 0;
 }

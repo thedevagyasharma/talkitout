@@ -1,0 +1,112 @@
+<head>
+    <meta http-equiv="origin-trial" content="AtZbvSCVDbgiEg+gCvCjSPIInKNKAyYukZ95yQddQYs/UBsVITehfPZgGhWRzuajA6IcxWUdCmywCaa/kzADfwAAAABMeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjQyMDAiLCJmZWF0dXJlIjoiV2ViQ29kZWNzIiwiZXhwaXJ5IjoxNjM4NDAzMTk5fQ==">
+    <meta http-equiv="origin-trial" content="AgAic6HENnqj4hsRYf+1LRcFqNAsfv2dSEggWjMna8U/hHV3ml5e9t15z7CJVW5aR8D0apLVJ6U7pVvvjI/c6AwAAABSeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjQyMDAiLCJmZWF0dXJlIjoiV2ViQXNzZW1ibHlTaW1kIiwiZXhwaXJ5IjoxNjQ5ODA3OTk5fQ==">
+    <meta http-equiv="origin-trial" content="ApyVT4vdDQ2PN5yQqMSXhvMcsy+NmU9sqqL1DPdIqlpPGL6WWugX8+YgTnHffT8hONiejdepUc++1KeguWH55AQAAABgeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjQyMDAiLCJmZWF0dXJlIjoiVW5yZXN0cmljdGVkU2hhcmVkQXJyYXlCdWZmZXIiLCJleHBpcnkiOjE2Mzk1MjYzOTl9">
+    <meta http-equiv="origin-trial" content="AmnhgElfz+j6f1BvQtutli1VIKUk4b/yM/6KHqSYY59luaOgvNDbAoJTSdnuDuoxiJz+SaE232esEWsphfXRjQIAAAB4eyJvcmlnaW4iOiJodHRwczovL3NvdXJjZS56b29tLnVzOjQ0MyIsImZlYXR1cmUiOiJVbnJlc3RyaWN0ZWRTaGFyZWRBcnJheUJ1ZmZlciIsImV4cGlyeSI6MTYzOTUyNjM5OSwiaXNTdWJkb21haW4iOnRydWV9">
+</head>
+<div class="container-fluid" >
+    <div class="row align-items-center">
+        <div class="col" style="margin: 5px -7px;">
+            <div class="row align-items-center" style="padding-bottom:10px;">
+                <div class="col screen-share video-box" [class.d-none]="!this.screenOn&&!this.screenIn">
+                    <canvas id="screencanvas" style="height: 700px"> </canvas>
+                </div>
+                <div class="col-6 video-box" [class.d-none]="this.screenOn||this.screenIn" *ngFor="let user of users">
+                    <div class="circle" [class.active]="!user.muted"><span>{{this.initials(user.displayName)}}</span></div>
+                    <canvas id={{this.canvasId(user.userId)}} class="video-canvas" style="height: 390px;"></canvas>
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="col-3 sidebar" [class.open]="this.chatbox">
+            <div class="row justify-content-around align-items-center">
+                <div class="col">
+                    <h3>Chat-messages</h3>
+                </div>
+                <div class="col-2" (click)="closeSide()">
+                    <button class="btn-close-sidebar"><img src="../../../assets/images/cross.svg"></button>
+                </div>
+            </div>
+            <div class="messages">
+                <div class="message" *ngFor="let msg of chatMessages">
+                    <div class="row m-0 justify-content-around align-items-center">
+                        <div class="col-9 p-0 name">{{msg.sender.name}} <span *ngIf="this.myUserID==msg.sender.userId"> (You)</span></div>
+                        <div class="col-3 p-0 time">{{msg.timestamp}}</div>
+                    </div>
+                    <div class="content">
+                        {{msg.message}}
+                    </div>
+                </div>
+            </div>
+            <form [formGroup]="chatForm">
+                <div class="field send-chat" [class.invalid]="">
+                    <input type="" class="form-control" formControlName="sendMessage" placeholder="Message" required>
+                    <button class="btn-send-chat" (click)="sendChat()"><img src="../../../assets/images/send.svg" alt=""></button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3 sidebar" [class.open]="this.partList">
+            <div class="row justify-content-around align-items-center">
+                <div class="col">
+                    <h3>Participants</h3>
+                </div>
+                <div class="col-2" (click)="closeSide()">
+                    <button class="btn-close-sidebar"><img src="../../../assets/images/cross.svg"></button>
+                </div>
+            </div>
+            <div class="participants">
+                <div class="row participant align-items-center" *ngFor="let user of this.users"> 
+                    <div class="col-2 justify-content-center">
+                        <div class="avatar align-items-center">{{this.initials(user.displayName)}}</div>
+                    </div>
+                    <div class="col-8">
+                        <div class="name">{{user.displayName}}<span *ngIf="this.myUserID==user.userId"> (You)</span><span *ngIf="user.isHost"> (Host)</span></div>
+                    </div>
+                    <div class="col-2 micstatus" [class.on]="!user.muted"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container-fluid meeting-controls">
+    <div class="row justify-content-around align-items-center" style="height: 100px;">
+        <div class="col">Host: {{hostName}}</div>
+        <div class="col">
+            <div class="row flex-nowrap align-items-center" style="text-align: center;">
+                <div class="col">
+                    <button class="btn-media mic" [class.on]="this.micOn" (click)="toggleMicSelf()"></button>
+                </div>
+                <div class="col">
+                    <button class="btn-media cam" [class.on]="this.camOn" (click)="toggleSelfVideo()"></button>
+                </div>
+                <div class="col">
+                    <button class="btn-media screenshare" [class.on]="this.screenOn" [disabled]="this.screenIn" (click)="shareScreen()"></button>
+                </div>
+                <div class="col">
+                    <button class="btn-menu ripple">
+                        <img src="../../../assets/images/three-dots.svg" alt="">
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="btn-menu ripple" (click)="openPart()">
+                        <img src="../../../assets/images/participants.svg" alt="">
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="btn-menu ripple" (click)="openChat()">
+                        <img src="../../../assets/images/chat.svg" alt="">
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="btn-end-call ripple" (click)="leaveMeeting()">
+                        <img width="32px" src="../../../assets/images/endcall.svg" alt="">
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col" style="text-align:end;">00:00:00 | {{ getSession().topic }}</div>
+    </div>
+</div>

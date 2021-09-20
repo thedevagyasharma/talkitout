@@ -31,8 +31,8 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "node_modules/@zoomus/websdk/dist/lib/",
-                "output": "node_modules/@zoomus/websdk/dist/lib/"
+                "input": "node_modules/@zoom/videosdk/dist/lib/",
+                "output": "node_modules/@zoom/videosdk/dist/lib/"
               }
             ],
             "styles": [
@@ -40,7 +40,7 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "@zoomus/websdk"
+              "@zoom/videosdk"
             ]
           },
           "configurations": {
@@ -105,7 +105,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "node_modules/@zoomus/websdk/dist/lib/"
+              "node_modules/@zoom/videosdk/dist/lib/"
             ],
             "styles": [
               "src/styles.scss"

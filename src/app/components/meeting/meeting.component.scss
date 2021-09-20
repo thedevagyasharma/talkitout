@@ -1,0 +1,250 @@
+.meeting-controls{
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    background-color: #F7F7FC;
+    padding: 0 30px;
+}
+
+.btn-media{
+    width: 64px;
+    height: 64px;
+    border: 3px solid #610BEF;
+    border-radius: 32px;
+    background-position: center;
+    background-repeat: no-repeat;
+    &.on{
+        background-color: #610BEF;
+        color: white;
+    }
+    &.mic{
+        background-image: url('../../../assets/images/mic-off-mui.svg');
+        &.on{
+            background-image: url('../../../assets/images/mic-on-mui.svg');
+        }
+    }
+    &.cam{
+        background-image: url('../../../assets/images/cam-off-mui.svg');
+        &.on{
+            background-image: url('../../../assets/images/cam-on-mui.svg');
+        }
+    }
+    &.screenshare{
+        background-image: url('../../../assets/images/ss-off-mui.svg');
+        &.on{
+            background-image: url('../../../assets/images/ss-on-mui.svg');
+        }
+    }
+}
+
+.btn-menu{
+    width: 64px;
+    height: 64px;
+    border: 0px;
+    border-radius: 32px;
+    background-color: #474747;
+    color: white;
+    &.ripple{
+        background-position: center;
+        transition: background 0.5s ease-out;
+        background: #474747 radial-gradient(circle, transparent 1%, #474747 1%) center/15000%;
+        &:active{
+            background-color: #707070;
+            background-size: 100%;
+            transition: background 0s ease;
+        }
+    }
+}
+
+.btn-end-call{
+    width: 96px;
+    height: 64px;
+    border: 0px;
+    border-radius: 32px;
+    background-color: #EF0B42;
+    &.ripple{
+        background-position: center;
+        transition: background 0.5s ease-out;
+        background: #EF0B42 radial-gradient(circle, transparent 1%, #EF0B42 1%) center/15000%;
+        &:active{
+            background-color: #eb4e72;
+            background-size: 100%;
+            transition: background 0s ease;
+        }
+    }
+}
+
+.sidebar{
+    background-color: #F7F7FC;
+    height: 873px;
+    padding: 20px;
+    display: none;
+    transform: translateX(100%);
+    transition: all 1s ease;
+
+    h3{
+        font-weight: 600;
+        font-size: 24px;
+        color: #474747;
+    }
+
+    &.open{
+        display: block;
+        transform: translateX(0);
+        transition: all 1s ease;
+    }
+
+    .btn-close-sidebar{
+        background: transparent;
+        height: 48px;
+        width: 48px;
+        border-radius: 24px;
+        border: none;
+        transition: background-color 0.2s ease;
+        &:hover{
+            background-color: #c4c4c4;
+            transition: background-color 0.2s ease;
+        }
+        &:active{
+            background-color: #9c9c9c ;
+            transition: background-color 0.1s ease;
+        }
+    }
+    
+    .messages{
+        overflow: auto;
+        overflow-x: hidden;
+        height: 70vh;
+        margin:20px 0;
+
+        .message{
+            background-color: white;
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 20px;
+    
+            .name{
+                font-weight: 600;
+                font-size: 18px;
+            }
+            .time{
+                right: 0;
+                margin-right: 0;
+                font-weight: 500;
+                color: #474747;
+                text-align: end;
+            }
+            .content{
+                margin-top: 5px;
+                font-size: 16px;
+            }
+    
+        }
+    }
+    .field{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        height: 64px;
+        align-self: center;
+        border-radius: 16px;  
+
+        &.send-chat{
+            position: relative;
+
+            .btn-send-chat{
+                position: absolute;
+                height: 64px;
+                top: 0;
+                right: 0;
+                padding: 0 20px;
+                border-radius: 0px 16px 16px 0px;
+                border: none;
+                &:hover{
+                    background-color: #c4c4c4;
+                    transition: background-color 0.2s ease;
+                }
+                &:active{
+                    background-color: #9c9c9c ;
+                    transition: background-color 0.1s ease;
+                }
+            }
+
+        }
+
+        input{
+            height: 100%;
+            width: 100%;
+            border: none;
+            border-radius: 16px;
+            background-color: #EFF0F6;
+        }   
+    }  
+    
+    .participants{
+        overflow: auto;
+        overflow-x: hidden;
+        margin: 20px 0;
+        .participant{
+            .avatar{
+                height: 32px;
+                width: 32px!important;
+                border-radius: 16px;
+                background-color: #c4c4c4;
+                text-align: center;
+                font-weight: 600;
+                padding: 4px 0;
+                margin: 10px 0;
+            }
+            .name{
+                color: #474747;
+                font-weight: 500;
+            }
+            .micstatus{
+                height: 32px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-image: url('../../../assets/images/mic-off-part.svg');
+                &.on{
+                    background-image: url('../../../assets/images/mic-on-part.svg');
+                }
+            }
+        }
+    }
+}
+
+.video-canvas{
+    background-color: black;
+    border-radius: 16px;
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+}
+
+
+.video-box{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    position: relative;
+    height: 390px;
+    
+    .circle{
+        display: flex;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        background-color: #707070;
+        height: 128px;
+        width: 128px;
+        border-radius: 64px;
+        font-size: 48px;
+        font-weight: 500;
+        color: white;
+        &.active{
+            border: 5px #610BEF solid;
+        }
+    }
+}
+
