@@ -26,6 +26,8 @@ export class StartmeetingComponent implements OnInit {
   //Video Preview Flags
   isbtnclckd = false
   iscamon = false;
+  noMeeting = false;
+  meetEx = false;
 
   //Audio Preview Flags
   isAudioConnected = false;
@@ -44,24 +46,31 @@ export class StartmeetingComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.meetEx = false;
+    this.noMeeting = false;
   }
 
 
   async createNewMeeting(){
-    this.meetService.vidClient.init('en-US', this.depAsset)
-    this.meetService.vidClient.join(
-      this.newMeetingForm.get('topic')?.value,
-      this.tokenService.generateVideoToken("FcUHdiWMrHFeqQd5jKJqWQz6nOXWQHJDjlua","sn9Vc2mln3urlQIBjE9USoczbOeiJEQcz9CG",this.newMeetingForm.get('topic')?.value, this.newMeetingForm.get('password')?.value),
-      this.userName,
-      this.newMeetingForm.get('password')?.value
-    ).then(()=>{
-      this.spinner = false;
-      console.log("Join Meeting Success")
-      this.router.navigateByUrl('/meeting')
-    }).catch((error) => {
-      console.error(error);
-    });
-    this.spinner = true;
+    this.meetService.vidClient.init('en-US', this.depAsset);
+    this.meetEx = false;
+        this.meetService.vidClient.join(
+          this.newMeetingForm.get('topic')?.value,
+          this.tokenService.generateVideoToken("FcUHdiWMrHFeqQd5jKJqWQz6nOXWQHJDjlua","sn9Vc2mln3urlQIBjE9USoczbOeiJEQcz9CG",this.newMeetingForm.get('topic')?.value, this.newMeetingForm.get('password')?.value),
+          this.userName,
+          this.newMeetingForm.get('password')?.value
+        ).then(()=>{
+            this.spinner = false;
+            console.log("Join Meeting Success")
+            this.router.navigateByUrl('/meeting')
+        }).catch((error) => {
+            console.error(error);
+        });
+        this.spinner = true;    
+  }
+
+  async joinMeeting(){
+    this.createNewMeeting();
   }
 
   logUser(){

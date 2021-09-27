@@ -26,20 +26,22 @@
             <div class="spinner" id="spinner">
                 <sa-spinner-dotted [enabled]="this.spinner" color="#610BEF"></sa-spinner-dotted>
             </div>
+            <div class="errors" [class.d-none]="!this.noMeeting">Meeting does not exist</div>
+            <div class="errors" [class.d-none]="!this.meetEx">Meeting already exists</div>
             <form style="margin-top: 20px;" [formGroup]="newMeetingForm" [class.d-none]=this.spinner>
                 <div class="field form-floating" [class.invalid]="">
-                    <input type="" class="form-control" formControlName="topic" placeholder="Set Meeting Topic" required>
+                    <input type="text" class="form-control" formControlName="topic" placeholder="Set Meeting Topic" required>
                     <label for="" class="label" *ngIf="hasRoute('/newmeeting')">Set Meeting Topic</label>
                     <label for="" class="label" *ngIf="hasRoute('/joinmeeting')">Meeting Topic</label>
                 </div>
                 <div class="field form-floating" [class.invalid]="">
-                    <input type="" class="form-control" formControlName="password" placeholder="Set Meeting Password" required>
+                    <input type="password" class="form-control" formControlName="password" placeholder="Set Meeting Password" required>
                     <label for="" class="label" *ngIf="hasRoute('/newmeeting')">Set Meeting Password</label>
                     <label for="" class="label" *ngIf="hasRoute('/joinmeeting')">Meeting Password</label>
                 </div>
                 <button class="btn-register" *ngIf="hasRoute('/newmeeting')" (click)="createNewMeeting()">Start New Meeting</button>
-                <button class="btn-register" *ngIf="hasRoute('/joinmeeting')" >Join Meeting</button> 
-                <!-- (click)="joinMeeting()" -->
+                <button class="btn-register" *ngIf="hasRoute('/joinmeeting')" (click)="joinMeeting()">Join Meeting</button>
+                <!--  -->
             </form>
             
         </div>

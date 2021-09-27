@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../shared/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PasswordService } from './password.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
@@ -49,9 +49,7 @@ export class UserService {
   }
 
   registerUser(user: User): Observable<User>{
-    console.log(user);
     user.id = this.getUserCount() + 1;
-    console.log(user.id);
     user.password = this.passService.hashPass(user.password);
     return this.http.post<User>(this. url, user, httpOptions);
   }

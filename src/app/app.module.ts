@@ -16,6 +16,7 @@ import { ResetpasswordComponent } from './components/resetpassword/resetpassword
 import { MeetingsService } from './services/meetings.service';
 import { MeetingComponent } from './components/meeting/meeting.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ResetpasswordComponent,
     MeetingComponent,
     FooterComponent,
+    LandingComponent,
   ],
   imports: [
     BrowserModule,

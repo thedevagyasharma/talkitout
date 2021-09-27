@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <div class="row header justify-content-between">
-        <div class="col  my-auto">
+    <div class="row header justify-content-between align-items-center">
+        <div class="col-4 my-auto flex-">
             <nav class="list-inline my-auto" >
                 <ul class="nav justify-content-start">
                     <li class="list-inline-item" *ngIf = "isLogged()"><a href="/" class="logo"><img src="../../../assets/images/talkitout-icon.png" alt=""></a></li>
@@ -12,7 +12,8 @@
         </div>
         <div class="col my-auto d-flex justify-content-center">
             <img src="../../../assets/images/talkitout.svg" width="200px" alt="" *ngIf = "!isLogged()">
-            <button class="btn-join" *ngIf = "isLogged()" onclick="window.location='/joinmeeting'">Join a Meeting</button>
+            <button class="btn-join" *ngIf = "isLogged()" onclick="window.location='/newmeeting'" style="margin: 0px 10px;">Host a Meeting</button>
+            <button class="btn-join" *ngIf = "isLogged()" onclick="window.location='/joinmeeting'" style="margin: 0px 10px;">Join a Meeting</button>
         </div>
         <div class="col my-auto">
             <nav class="list-inline my-auto" >

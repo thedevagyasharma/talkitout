@@ -5,8 +5,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { StartmeetingComponent } from './components/startmeeting/startmeeting.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { MeetingComponent } from './components/meeting/meeting.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 const routes: Routes = [
+  {path: '', component: LandingComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'newmeeting', component: StartmeetingComponent},

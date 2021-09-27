@@ -85,10 +85,17 @@
                 <div class="col">
                     <button class="btn-media screenshare" [class.on]="this.screenOn" [disabled]="this.screenIn" (click)="shareScreen()"></button>
                 </div>
-                <div class="col">
-                    <button class="btn-menu ripple">
-                        <img src="../../../assets/images/three-dots.svg" alt="">
-                    </button>
+                <div class="col" [class.d-none]="this.hostId!=this.myUserID">
+                    <div class="btn-group dropup">
+                        <button type="button" id="dropdownMenuBtn" class="btn-menu ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" (click)="toggleMenu()">
+                            <img src="../../../assets/images/three-dots.svg" alt="">
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuBtn" [class.show]="this.menuBox">
+                            <button class="dropdown-item" (click)="this.muteAll()">Mute All Participants</button>
+                            <button class="dropdown-item" (click)="this.endMeeting()">End Meeting for All</button>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col">
                     <button class="btn-menu ripple" (click)="openPart()">
@@ -107,6 +114,6 @@
                 </div>
             </div>
         </div>
-        <div class="col" style="text-align:end;">00:00:00 | {{ getSession().topic }}</div>
+        <div class="col" style="text-align:end;">  {{ getSession().topic }} | {{this.currentTime()}}</div>
     </div>
 </div>
